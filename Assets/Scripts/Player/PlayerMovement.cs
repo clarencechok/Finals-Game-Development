@@ -20,6 +20,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
 
+    [Header("Multiple Jumps")]
+    //this variable will determine how many times we can jump
+    [SerializeField] private int extraJumps;
+    //this variable will take care of how many jumps we have at the moment
+    private int jumpCounter;
+
+    [Header("Wall Jumping")]
+    //will determine how far left or right we can do when wall jump
+    [SerializeField] private float wallJumpX;
+    //this variable will represent how far up we go when wall jump
+    [SerializeField] private float wallJumpY;
+
     [Header("Coyote Time")]
     //this variable will help us determine the time that player can hang in air before the player perform the jump
     [SerializeField] private float coyoteTime;
@@ -87,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 //reset the counter when the player is on the ground
                 coyoteCounter = coyoteTime;
+                //resetting of the jumpCounter
+                jumpCounter = extraJumps;
             }else
             {
                 //player not grounded
@@ -99,8 +113,8 @@ public class PlayerMovement : MonoBehaviour
     //this section of code will help us optimise our jumping code
     private void Jump()
     {
-        //check if the counter is smaller than 0 and the player not on the wall, dont perform next few code
-        if (coyoteCounter < 0 && !onWall())
+        //check if the counter is smaller than 0 , the player not on the wall and there are no jumps that are extra, dont perform next few code
+        if (coyoteCounter < 0 && !onWall() && jumpCounter <=0)
         {
             return;
         }
@@ -125,6 +139,15 @@ public class PlayerMovement : MonoBehaviour
                 if (coyoteCounter > 0)
                 {
                     body.velocity = new Vector2(body.velocity.x, jumpPower);
+                }else
+                {
+                    //check if jumpcounter is larger than 0
+                    if (jumpCounter > 0)
+                    {
+                        //apply jump power and then decrease the jump counter by 1
+                        body.velocity = new Vector2(body.velocity.x, jumpPower);
+                        jumpCounter--;
+                    }
                 }
                 //reset the counter to prevent the occurence of double jumpings.
                 coyoteCounter = 0;
@@ -134,7 +157,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallJump()
     {
-
+        //this will allow players to be pushed away from wall and upwards at same time
+        body.AddForce(new Vector2(-Mathf.Sign(transform.localScale.x) * wallJumpX, wallJumpY));
+        wallJumpCooldown = 0;
     }
 
     //this section of code will tell if our player is grounded or not
