@@ -80,5 +80,22 @@ public class Health : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-        
+      
+    public void Respawn()
+    {
+        //player is no longer dead
+        dead = false;
+        //reset player health
+        AddHealth(startingHealth);
+        //reset death animation
+        anim.ResetTrigger("die");
+        //play idle animation
+        anim.Play("Idle");
+        //giving invulnerability after the player respawn
+        StartCoroutine(Invunerability());
+
+        //activate all attached component classes
+        foreach (Behaviour component in components)
+            component.enabled = true;
+    }
 }
