@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMovement playerMovement;
     //this float will ensure that enough time have passed since last shot before attacking
     private float cooldownTimer = Mathf.Infinity;
+    [SerializeField] private AudioClip fireballSound;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack()
     {
+        SoundManager.instance.PlaySound(fireballSound);
         //play the attack animation when attacking
         anim.SetTrigger("attack");
         //when attack, the cooldowntimer will reset to 0
