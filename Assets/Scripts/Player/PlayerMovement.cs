@@ -44,49 +44,37 @@ public class PlayerMovement : MonoBehaviour
         else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(-1,1,1);
 
-        
-           
-
         //Setting of the animator parameters
         //our parameter in the animation sector is called run thats why i put run here
         anim.SetBool("run", horizontalInput != 0);
         //this will give the animator information wether the player is on the ground or not
         anim.SetBool("grounded", isGrounded());
 
-        //this part of code is responsible for wall jumping logic
-        if(wallJumpCooldown > 0.2f)
+        //jumping
+        //make sure we call the jump method only once with GetKeyDown
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-           
-            //use body.velocity to change how fast the players moving and in what direction
-            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+            Jump();
+        }
 
-            //this if statement will check if player is on the wall and not grounded
-            if (onWall() && !isGrounded())
-            {
-                body.gravityScale = 0;
-                //if the player jump to the wall, he will get stuck and unable to fall down
-                body.velocity = Vector2.zero;
-            }
-            else
-            {
-                body.gravityScale = 5;
-            }
+        //implementation of jump height that can be adjusted
+        //check the release of space key using GetKeyUp method
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            //check if body y velocity is bigger than 0 and this code will result in a smaller jump
+            body.velocity = new Vector2(body.velocity.x, body.velocity.y / 2);
+        }
 
-            //using IF input.getkey to check for space presses
-            //input.getkey will only return true or false when key is pressed or when not pressed
-            if (Input.GetKey(KeyCode.Space))
-            {
-                //calling the jump function
-                Jump();
-                if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
-                {
-                    SoundManager.instance.PlaySound(jumpSound);
-                }
-            }
+        //check if the player is on wall
+        if(onWall())
+        {
+            body.gravityScale = 0;
+            body.velocity = Vector2.zero;
         }
         else
         {
-            wallJumpCooldown += Time.deltaTime;
+            body.gravityScale = 6;
+            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
         }
     }
 
@@ -97,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
-            anim.SetTrigger("jump");
+            SoundManager.instance.PlaySound(jumpSound);
         }
         //check that the player is on the wall and is not grounded to perform our special jump
         else if(onWall() && !isGrounded())
