@@ -185,6 +185,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 512
+  jumpSound: {fileID: 8300000, guid: 89231929a09f590488f2ba3b2da90861, type: 3}
 --- !u!95 &8617227007395136388
 Animator:
   serializedVersion: 3
@@ -248,3 +249,5 @@ MonoBehaviour:
   components:
   - {fileID: 8617227007395136389}
   - {fileID: 8617227007395136387}
+  deathSound: {fileID: 8300000, guid: e2b609222f878c441be599097a88143f, type: 3}
+  hurtSound: {fileID: 8300000, guid: c74ae71e413f583489af53067fbbd606, type: 3}

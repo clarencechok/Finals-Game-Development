@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     //to help us access the horizontalInput inside jump method
     private float horizontalInput;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip jumpSound;
+
     //creating an awake method
     private void Awake()
     {
@@ -72,8 +75,14 @@ public class PlayerMovement : MonoBehaviour
             //using IF input.getkey to check for space presses
             //input.getkey will only return true or false when key is pressed or when not pressed
             if (Input.GetKey(KeyCode.Space))
+            {
                 //calling the jump function
                 Jump();
+                if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
+                {
+                    SoundManager.instance.PlaySound(jumpSound);
+                }
+            }
         }
         else
         {

@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Health\Health.cs" />
     <Compile Include="Assets\Scripts\Health\HealthCollectible.cs" />
     <Compile Include="Assets\Scripts\Health\Healthbar.cs" />
+    <Compile Include="Assets\Scripts\LoadingManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile.cs" />

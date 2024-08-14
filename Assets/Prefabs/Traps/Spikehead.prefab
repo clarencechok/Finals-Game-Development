@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037030595215241969}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.04, y: 2.95, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
@@ -144,9 +144,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 1.2
-  range: 5
+  speed: 1
+  range: 16
   checkDelay: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
+  impactSound: {fileID: 8300000, guid: 6707430e144a774478acd9030aad9d9b, type: 3}
