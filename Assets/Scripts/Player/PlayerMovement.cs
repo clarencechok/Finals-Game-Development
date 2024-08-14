@@ -20,6 +20,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
 
+    [Header("Coyote Time")]
+    //this variable will help us determine the time that player can hang in air before the player perform the jump
+    [SerializeField] private float coyoteTime;
+    //this variable will show how much time passed since player ran off the edge of an object
+    private float coyoteCounter;
+
     //creating an awake method
     private void Awake()
     {
@@ -75,43 +81,60 @@ public class PlayerMovement : MonoBehaviour
         {
             body.gravityScale = 6;
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+
+            //checking wether the player is grounded or not
+            if (isGrounded())
+            {
+                //reset the counter when the player is on the ground
+                coyoteCounter = coyoteTime;
+            }else
+            {
+                //player not grounded
+                //start decreasing the counter whenever the player walk off the edge
+                coyoteCounter -= Time.deltaTime;
+            }
         }
     }
 
     //this section of code will help us optimise our jumping code
     private void Jump()
     {
-        //allow us to handle the jump differently depending on wether we on ground or on wall
-        if(isGrounded())
+        //check if the counter is smaller than 0 and the player not on the wall, dont perform next few code
+        if (coyoteCounter < 0 && !onWall())
         {
-            body.velocity = new Vector2(body.velocity.x, jumpPower);
-            SoundManager.instance.PlaySound(jumpSound);
+            return;
         }
-        //check that the player is on the wall and is not grounded to perform our special jump
-        else if(onWall() && !isGrounded())
+        //playing of the jumpSound music
+        SoundManager.instance.PlaySound(jumpSound);
+
+        //check if player is on the wall
+        if (onWall())
         {
-            //this if statement will check if the horizontal input is equal to 0
-            if(horizontalInput == 0)
+            WallJump();
+        }else
+        {
+            //check if player is grounded
+            //apply jump force if grounded
+            if (isGrounded())
             {
-                //0 in y axis to prevent player from being thrown upwards.
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-                //flip the player in the opposite direction when he jumps away from the wall.
-                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                body.velocity = new Vector2(body.velocity.x, jumpPower);
             }
             else
             {
-                //add a force on the player's body that pushes him away from wall and upwards at same time
-                //we access the body velocity creating a new vector2 and we get the direction  the player is facing and create force opposite it.
-                //Mathf.Sign return the sign of the number. if get negative number it will return -1 and if positive number will be 1
-                //the negative sign infront of Mathf.Sign will push the player away from the wall.
-                //3 is the power in which the player will be pushed away from the wall.
-                //6 is the magnitude of the force that pushes the player upwards.
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
+                //check if player not grounded and the counter is larger than 0 then do a normal jump
+                if (coyoteCounter > 0)
+                {
+                    body.velocity = new Vector2(body.velocity.x, jumpPower);
+                }
+                //reset the counter to prevent the occurence of double jumpings.
+                coyoteCounter = 0;
             }
-            //when the player is stuck to wall and not grounded, make the player wait abit before performing next jump
-            wallJumpCooldown = 0;
         }
-        
+    }
+
+    private void WallJump()
+    {
+
     }
 
     //this section of code will tell if our player is grounded or not
@@ -134,7 +157,6 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
     }
-
     public bool canAttack()
     {
         //define when exactly a player will be able to attack
