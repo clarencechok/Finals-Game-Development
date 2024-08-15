@@ -8,15 +8,30 @@ public class PlayerRespawn : MonoBehaviour
     private Transform currentCheckpoint;
     //reference to health to reset player health when respawn
     private Health playerHealth;
+    //to help us gain access to UImanager script
+    private UIManager uiManager;
 
     private void Awake()
     {
         //grab reference to playerHealth
         playerHealth = GetComponent<Health>();
+        //return the first UI manager found
+        uiManager = FindObjectOfType<UIManager>();
     }
 
-    public void Respawn()
+    public void CheckRespawn()
     {
+        //checking of wether there are any checkpoints available left
+        //if no available checkpoints
+        if (currentCheckpoint == null)
+        {
+            //pop up of the game over screen
+            uiManager.GameOver();
+
+            //prevent the execution of the rest of the code that is present in this function
+            return;
+        }
+
         //this will move the player to the checkpoint position
         transform.position = currentCheckpoint.position;
         //restore player health and resetting of the animation
