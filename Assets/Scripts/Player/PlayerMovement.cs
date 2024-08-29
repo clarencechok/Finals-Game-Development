@@ -53,14 +53,31 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        
-        //to make the player flip left and right animation when moving left/right
-        //check if the player is moving right
-        if (horizontalInput > 0.01f)
-            transform.localScale = Vector3.one;
-        //check if the player is moving left
-        else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-1,1,1);
+
+        // Determine the desired scale based on input
+        Vector3 currentScale = transform.localScale;
+        Vector3 targetScale = currentScale;
+
+        if (horizontalInput > 0.01f) // Moving right
+        {
+            if (currentScale.x < 0)
+            {
+                targetScale.x = -currentScale.x; // Flip the sign to 1
+            }
+        }
+        else if (horizontalInput < -0.01f) // Moving left
+        {
+            if (currentScale.x > 0)
+            {
+                targetScale.x = -currentScale.x; // Flip the sign to -1
+            }
+        }
+
+        // Update the character's scale only if it has changed
+        if (currentScale.x != targetScale.x)
+        {
+            transform.localScale = targetScale;
+        }
 
         //Setting of the animator parameters
         //our parameter in the animation sector is called run thats why i put run here
