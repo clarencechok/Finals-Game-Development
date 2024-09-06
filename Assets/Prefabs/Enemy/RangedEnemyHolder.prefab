@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4822695674345651711}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.05, y: 0.5, z: 0}
+  m_LocalScale: {x: -3.0322933, y: 3.11359, z: 1}
   m_Children:
   - {fileID: 5825877298447845401}
   m_Father: {fileID: 5825877297482150393}
@@ -73,11 +73,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -489405957
-  m_SortingLayer: 2
+  m_SortingLayerID: -2073353991
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 84ce2f114ad12bd4ebafc77060220324, type: 3}
-  m_Color: {r: 0.9339623, g: 0.118948035, b: 0.118948035, a: 1}
+  m_Sprite: {fileID: 4723107735738678597, guid: 5091e5c02f3ce90468893d00f9ebd334,
+    type: 3}
+  m_Color: {r: 0.49803925, g: 0.49803925, b: 0.49803925, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07518864, y: -0.55359674}
+  m_Offset: {x: -0.0057509914, y: 0.009469777}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 2.56}
+    oldSize: {x: 0.39, y: 0.65}
     newSize: {x: 5.12, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6181264, y: 1.3184857}
+  m_Size: {x: 0.38555676, y: 0.66526765}
   m_EdgeRadius: 0
 --- !u!114 &4822695674345651707
 MonoBehaviour:
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCooldown: 1
-  range: 13
+  range: 3
   damage: 1
   firepoint: {fileID: 5825877298447845401}
   fireballs:
