@@ -16319,6 +16319,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4624007909727771401, guid: 484c486ee1e3c684a95950599c801e31,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624007909727771401, guid: 484c486ee1e3c684a95950599c801e31,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624007909727771401, guid: 484c486ee1e3c684a95950599c801e31,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4624007909727771411, guid: 484c486ee1e3c684a95950599c801e31,
         type: 3}
       propertyPath: fireballs.Array.data[0]
