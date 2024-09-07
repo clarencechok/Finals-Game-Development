@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5133145964315406280}
   - component: {fileID: 2403141696659672508}
   - component: {fileID: 2703092785286396486}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Spikes
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7537537653245195233}
   - component: {fileID: 5930618063623361804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Idle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8835873456567347591}
   - component: {fileID: 1416974274684193699}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8396804117338741755}
   - component: {fileID: 680978080981572374}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Idle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
