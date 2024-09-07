@@ -22,12 +22,24 @@ public class Health : MonoBehaviour
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip hurtSound;
 
+    [Header("Fall Death Height")]
+    [SerializeField] private float fallDeathHeight = -10f;
+
     private void Awake()
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
     }
+    private void Update()
+    {
+        // Check if the player falls below the specified height
+        if (transform.position.y < fallDeathHeight && !dead)
+        {
+            TakeDamage(currentHealth); // Take damage equal to current health to ensure death
+        }
+    }
+
     public void TakeDamage(float _damage)
     {
         if (invulnerable) return;
