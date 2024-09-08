@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00d5f93e422dbb45bc1e2a7ec89cdd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 0.25
+  attackCooldown: 0.4
   firePoint: {fileID: 4624007909666463727}
   fireballs:
   - {fileID: 0}
@@ -256,6 +256,7 @@ MonoBehaviour:
   - {fileID: 4624007909727771413}
   deathSound: {fileID: 8300000, guid: e2b609222f878c441be599097a88143f, type: 3}
   hurtSound: {fileID: 8300000, guid: c74ae71e413f583489af53067fbbd606, type: 3}
+  fallDeathHeight: -10
 --- !u!114 &621688401890940553
 MonoBehaviour:
   m_ObjectHideFlags: 0
